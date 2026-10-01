@@ -47,7 +47,7 @@ public class AuthController {
         return ResponseEntity.ok(authService.findByEmail(dto.getEmail()));
     }
 
-    // Devuelve el usuario logueado (requiere Basic Auth: email + contraseña)
+
     @GetMapping("/me")
     public ResponseEntity<Response.UserResponse> me() {
         return ResponseEntity.ok(new Response.UserResponse(auth.getCurrentUser()));
