@@ -48,7 +48,7 @@ public class AuthService implements UserDetailsService {
         return new Response.UserResponse(user);
     }
 
-    // Spring Security lo usa en el login; el "username" aquí es el email
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
