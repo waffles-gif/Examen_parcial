@@ -1,34 +1,67 @@
 package com.example.parcial.Entity;
-import jakarta.persistence.column;
-import jakarta.presistence.column;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//falta mas
+import jakarta.persistence.Table;
 
-@jakarta.persistence.Entity
-@Table(name="User")
+@Entity
+@Table(name = "users")
 public class User {
-    @Id
-    @GeneratedValue(strategy=GenerationTyoe.IDENTITY)
-    private long id;
-    @column (nullable = false, unique = true)
-    private String username;
-    @column (nullable = false, unique = true)
-    private email;
-    @column (nullable = false)
-    private String passsword; //la contraseña debe tener al menos 8 caracteres , la contraseña se debe  alamacenser usado PasswordEncoder
-    @column (nullable = false)
-    private strinf role = "ROLE_ATTENDE", "ROLE_ORGANIZAER, ROLE_ADEMIN";
 
-    public User(){
+    public enum Role {
+        ROLE_ATTENDEE,
+        ROLE_ORGANIZER,
+        ROLE_ADMIN
     }
-    public User(string username , string email; string Passsword ){
-        this.Username =username;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.ROLE_ATTENDEE;
+
+    public User() {
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
-        this.password= password;
+        this.password = password;
     }
-    public Long getId(){return id;}
-    public void setId(Long id) {this.id=id;}
-    // falta
+
+    public User(String username, String email, String password, Role role) {
+        this(username, email, password);
+        this.role = role;
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 }
